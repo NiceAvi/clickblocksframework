@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# restricts access to the configuration data, cache data and error logs.
+RewriteRule ^/?Application/_config/?(.*)$ /controller.php
+RewriteRule ^/?Temporary/_cache/?(.*)$ /controller.php
+RewriteRule ^/?Temporary/_log/?(.*)$ /controller.php
+
+# if the directory or file exists, then use them directly.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# otherwise redirect to controller.php
+# RewriteRule . /controller.php  
+# DirectoryIndex /controller.php
+RewriteRule ^(.*)$ /development/Application/controller.php [L]
+DirectoryIndex /development/Application/controller.php
